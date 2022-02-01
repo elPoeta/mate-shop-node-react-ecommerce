@@ -1,8 +1,10 @@
-import express, { Request, Response } from "express";
+import './config/envConf'
+import express, { Application, Request, Response } from 'express';
+import './config/connection';
 import cors from 'cors';
 
-const PORT: string = process.env.PORT || '5000';
-const app = express();
+const PORT: undefined | string = process.env.PORT;
+const app: Application = express();
 
 app.use(express.json());
 app.use(cors());
