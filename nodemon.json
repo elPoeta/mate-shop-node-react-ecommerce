@@ -6,7 +6,7 @@
     "coverage"
   ],
   "watch": [
-    "src/*"
+    "server/src/*"
   ],
   "ext": "js, ts, json"
 }
