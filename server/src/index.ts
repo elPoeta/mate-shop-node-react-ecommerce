@@ -2,8 +2,8 @@ import './config/envConf';
 import config from './config/envConf';
 import express, { Application, Request, Response } from 'express';
 import connectionDB from './config/connection';
-import { parsers } from './setUpMiddlewares/parser';
-import { routes } from './setUpMiddlewares/routes';
+import { parsers } from './setUpApp/parser';
+import { routes } from './setUpApp/routes';
 
 connectionDB();
 
