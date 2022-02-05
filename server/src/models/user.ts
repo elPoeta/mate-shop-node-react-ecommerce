@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { UserI } from '@interfaces/user';
+import { UserDocument } from '@interfaces/user';
 
 const UserSchema: Schema = new Schema(
   {
@@ -33,4 +33,4 @@ const UserSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<UserI>("User", UserSchema);
+export default model<UserDocument>("User", UserSchema);
