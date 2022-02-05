@@ -4,7 +4,19 @@
   "description": "node react ecommerce",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server/src/index.ts"
+    "dev": "nodemon -e ts --exec \"tsc && node server/dist/index.js\""
+  },
+  "_moduleAliases": {
+    "@config": "server/dist/config",
+    "@controllers": "server/dist/controllers",
+    "@interfaces": "server/dist/interfaces",
+    "@middlewares": "server/dist/middlewares",
+    "@models": "server/dist/models",
+    "@routes": "server/dist/routes",
+    "@setupApp": "server/dist/setupApp",
+    "@service": "server/dist/service",
+    "@repository": "server/dist/repository",
+    "@utils": "server/dist/utils"
   },
   "repository": {
     "type": "git",
@@ -34,6 +46,7 @@
     "cors": "^2.8.5",
     "dotenv": "^15.0.0",
     "express": "^4.17.2",
+    "module-alias": "^2.2.2",
     "mongoose": "^6.1.9"
   }
 }

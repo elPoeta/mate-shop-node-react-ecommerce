@@ -1,7 +1,7 @@
 
 import { config as configDotenv } from 'dotenv'
 import { resolve } from 'path'
-import { Config } from './type';
+import { Config } from '@config/type';
 
 switch (process.env.NODE_ENV) {
   case "development":
