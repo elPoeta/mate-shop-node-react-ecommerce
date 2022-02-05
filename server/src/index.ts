@@ -1,9 +1,10 @@
-import './config/envConf';
-import config from './config/envConf';
-import express, { Application, Request, Response } from 'express';
-import connectionDB from './config/connection';
-import { parsers } from './setUpApp/parser';
-import { routes } from './setUpApp/routes';
+import 'module-alias/register';
+import '@config/envConf';
+import config from '@config/envConf';
+import express, { Application } from 'express';
+import connectionDB from '@config/connection';
+import { parsers } from '@setupApp/parser';
+import { routes } from '@setupApp/routes';
 
 connectionDB();
 

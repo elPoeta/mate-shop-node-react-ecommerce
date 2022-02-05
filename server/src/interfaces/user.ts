@@ -1,9 +1,14 @@
-import { Document } from "mongoose";
+import { Document, ObjectId } from "mongoose";
 
-export interface UserI extends Document {
+export interface User {
+  ID?: string | number | ObjectId;
   email: string;
-  password: number;
-  resetPasswordToken: string;
-  resetPasswordExpire: Date;
+  password?: string;
+  confirmPassword?: string | undefined;
+  resetPasswordToken?: string;
+  resetPasswordExpire?: Date;
   isAdmin: boolean;
+
 }
+
+export interface UserDocument extends User, Document { }
