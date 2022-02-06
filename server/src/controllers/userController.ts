@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "@middlewares/asyncHandler";
 import { User } from "@interfaces/user";
-import { AuthService } from "@service/authService";
+import { UserService } from "@service/userService";
 import { ErrorResponse } from "@utils/errorRespnse";
 
 export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -11,7 +11,7 @@ export const register = asyncHandler(async (req: Request, res: Response, next: N
     throw new ErrorResponse('Error password not match', 400);
   }
 
-  const user: User = await AuthService.createNewUser(body);
+  const user: User = await UserService.createNewUser(body);
   res.status(201).json({
     statusCode: 201,
     message: 'User registred',
