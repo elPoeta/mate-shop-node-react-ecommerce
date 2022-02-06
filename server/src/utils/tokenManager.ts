@@ -6,7 +6,6 @@ import { ErrorResponse } from "@utils/errorRespnse";
 
 export const generateAuthToken = (user: User): string => {
   try {
-    console.log('EXP TOKE', config.JWT_EXPIRE)
     return jwt.sign(
       {
         id: user.ID,

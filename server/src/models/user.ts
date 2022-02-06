@@ -34,10 +34,6 @@ const UserSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-UserSchema.methods.matchPassword = async function (enteredPassword: string) {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
-
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();

@@ -5,6 +5,7 @@ import { User } from "@interfaces/user";
 import { UserService } from "@service/userService";
 import { ErrorResponse } from "@utils/errorRespnse";
 import { generateAuthToken } from "@utils/tokenManager";
+import { matchPassword } from "@utils/userPasswordManager";
 
 export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const body = req.body as Pick<User, "email" | "password" | "isAdmin" | "confirmPassword">;
@@ -16,6 +17,15 @@ export const register = asyncHandler(async (req: Request, res: Response, next: N
   sendTokenResponse(user, 201, res);
 });
 
+export const login = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const { email, password } = req.body;
+  const user: User | any = UserService.findByEmail(email);
+  if (!user && (await !matchPassword(password, user.password))) {
+    res.status(401)
+    throw new Error('Invalid email or password');
+  }
+  sendTokenResponse(user, 201, res);
+});
 
 const sendTokenResponse = (user: User, statusCode: number, res: Response) => {
   const token = generateAuthToken(user);
