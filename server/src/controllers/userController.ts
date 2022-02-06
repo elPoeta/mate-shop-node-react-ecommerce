@@ -1,8 +1,10 @@
-import { NextFunction, Request, Response } from "express";
+import { CookieOptions, NextFunction, Request, Response } from "express";
+import config from "@config/envConf";
 import asyncHandler from "@middlewares/asyncHandler";
 import { User } from "@interfaces/user";
 import { UserService } from "@service/userService";
 import { ErrorResponse } from "@utils/errorRespnse";
+import { generateAuthToken } from "@utils/tokenManager";
 
 export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const body = req.body as Pick<User, "email" | "password" | "isAdmin" | "confirmPassword">;
@@ -10,13 +12,30 @@ export const register = asyncHandler(async (req: Request, res: Response, next: N
     res.status(400);
     throw new ErrorResponse('Error password not match', 400);
   }
-
   const user: User = await UserService.createNewUser(body);
-  res.status(201).json({
-    statusCode: 201,
-    message: 'User registred',
-    id: user.ID,
-    email: user.email,
-    isAdmin: user.isAdmin
-  });
+  sendTokenResponse(user, 201, res);
 });
+
+
+const sendTokenResponse = (user: User, statusCode: number, res: Response) => {
+  const token = generateAuthToken(user);
+
+  const options: CookieOptions = {
+    expires: new Date(
+      Date.now() + config.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true
+  };
+
+  if (process.env.NODE_ENV === 'production') {
+    options.secure = true;
+  }
+
+  res
+    .status(statusCode)
+    .cookie('token', token, options)
+    .json({
+      success: true,
+      token
+    });
+};
