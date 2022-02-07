@@ -24,7 +24,9 @@ const getConfig = (): Config => {
     NODE_ENV: process.env.NODE_ENV ? process.env.NODE_ENV : "development",
     PORT: process.env.PORT ? Number(process.env.PORT) : 5000,
     MONGO_URI: process.env.MONGO_URI ? process.env.MONGO_URI : "mongodb://localhost:27017/mate_shop",
-    JWT_SECRET: process.env.JWT_SECRET ? process.env.JWT_SECRET : "secret"
+    JWT_SECRET: process.env.JWT_SECRET ? process.env.JWT_SECRET : "secret",
+    JWT_EXPIRE: process.env.JWT_EXPIRE ? process.env.JWT_EXPIRE : '30d',
+    JWT_COOKIE_EXPIRE: process.env.JWT_COOKE_EXPIRE ? Number(process.env.JWT_COOKE_EXPIRE) : 30
   };
 };
 
