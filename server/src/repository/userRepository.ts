@@ -1,8 +1,11 @@
 import UserModel from '@models/user';
 import { User, UserDocument } from '@interfaces/user';
+import { ObjectId, Types } from 'mongoose';
+import { JwtPayload } from 'jsonwebtoken';
 export interface UserRepositoryI {
   createNewUser(userParam: User): Promise<User>;
   findByEmail(email: string): Promise<User | any>;
+  findById(id: string): Promise<User | any>;
 }
 
 export const UserRepository: UserRepositoryI = {
@@ -20,6 +23,12 @@ export const UserRepository: UserRepositoryI = {
     const user: UserDocument | null = await UserModel.findOne({ email: email });
     if (!user) return null;
     const userResponse: User = { ID: user._id, email: user.email, isAdmin: user.isAdmin, password: user.password }
+    return userResponse;
+  },
+  async findById(id: string) {
+    const user: UserDocument | null = await UserModel.findById({ _id: new Types.ObjectId(id) });
+    if (!user) return null;
+    const userResponse: User = { ID: user._id, email: user.email, isAdmin: user.isAdmin }
     return userResponse;
   }
 
