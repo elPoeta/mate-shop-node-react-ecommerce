@@ -31,6 +31,7 @@ export const protectedRoute = asyncHandler(async (req: CustomRequest, res: Respo
         isAdmin: user.isAdmin,
         email: user.email
       }
+      next();
     } catch (error) {
       console.error(error)
       res.status(401);
