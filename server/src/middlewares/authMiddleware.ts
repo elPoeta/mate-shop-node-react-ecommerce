@@ -17,11 +17,13 @@ interface CustomRequest extends Request {
 
 export const protectedRoute = asyncHandler(async (req: CustomRequest, res: Response, next: NextFunction) => {
   let token: string | undefined | null;
+  console.log('TOKEN ', req.headers.authorization);
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
       token = req.headers.authorization.split(' ')[1];
       const decode = jwt.verify(token, config.JWT_SECRET);
       const user: User | null = await UserRepository.findById((<any>decode).id);
+      console.log('USER ', user);
       if (!user) {
         res.status(401)
         throw new Error('Not authorized, no token')
@@ -48,6 +50,7 @@ export const protectedRoute = asyncHandler(async (req: CustomRequest, res: Respo
 export const adminRoute = (req: CustomRequest, res: Response, next: NextFunction) => {
   if (req.user && req.user.isAdmin) {
     next();
+    return;
   }
   res.status(401);
   throw new ErrorResponse("Not authorized", 401);

@@ -1,7 +1,7 @@
 import UserModel from '@models/user';
 import { User, UserDocument } from '@interfaces/user';
-import { ObjectId, Types } from 'mongoose';
-import { JwtPayload } from 'jsonwebtoken';
+import { Types } from 'mongoose';
+
 export interface UserRepositoryI {
   createNewUser(userParam: User): Promise<User>;
   findByEmail(email: string): Promise<User | any>;
