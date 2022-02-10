@@ -8,7 +8,7 @@ import { generateAuthToken } from "@utils/tokenManager";
 import { matchPassword } from "@utils/userPasswordManager";
 
 export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const body = req.body as Pick<User, "email" | "password" | "isAdmin" | "confirmPassword">;
+  const body = req.body as Pick<User, "ID" | "email" | "password" | "isAdmin" | "confirmPassword">;
   if (!body.password?.length || !body.confirmPassword?.length || body.confirmPassword !== body.password) {
     res.status(400);
     throw new ErrorResponse('Error password not match', 400);
