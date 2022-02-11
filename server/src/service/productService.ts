@@ -1,12 +1,12 @@
-import { Product } from "@interfaces/product"
+import { ProductI } from "@interfaces/product"
 import { ProductRepository } from "@repository/productRepository"
 
 export interface ProductServiceI {
-  createProduct(product: Product): Promise<Product>
+  createProduct(product: ProductI): Promise<ProductI>
 }
 
 export const ProductService: ProductServiceI = {
-  async createProduct(productParam: Product): Promise<Product> {
+  async createProduct(productParam: ProductI): Promise<ProductI> {
     return await ProductRepository.createProduct(productParam);
   }
 }
