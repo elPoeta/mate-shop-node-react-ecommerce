@@ -5,7 +5,7 @@ import * as jwt from "jsonwebtoken";
 import { ObjectId } from "mongoose";
 import asyncHandler from "./asyncHandler";
 import { UserRepository } from "@repository/userRepository";
-import { User } from "@interfaces/user";
+import { UserI } from "@interfaces/user";
 
 interface CustomRequest extends Request {
   user?: {
@@ -17,19 +17,17 @@ interface CustomRequest extends Request {
 
 export const protectedRoute = asyncHandler(async (req: CustomRequest, res: Response, next: NextFunction) => {
   let token: string | undefined | null;
-  console.log('TOKEN ', req.headers.authorization);
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
       token = req.headers.authorization.split(' ')[1];
       const decode = jwt.verify(token, config.JWT_SECRET);
-      const user: User | null = await UserRepository.findById((<any>decode).id);
-      console.log('USER ', user);
+      const user: UserI | null = await UserRepository.findById((<any>decode).id);
       if (!user) {
         res.status(401)
         throw new Error('Not authorized, no token')
       }
       req.user = {
-        id: user.ID,
+        id: user._id,
         isAdmin: user.isAdmin,
         email: user.email
       }

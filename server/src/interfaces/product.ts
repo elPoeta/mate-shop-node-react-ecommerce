@@ -1,7 +1,7 @@
 import { ObjectId, Document } from "mongoose";
 
 export interface ProductI {
-  _id: string | number | ObjectId | null;
+  _id: string | number | ObjectId;
   name: string;
   image: string;
   description: string;

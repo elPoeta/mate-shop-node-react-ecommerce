@@ -1,14 +1,14 @@
 import * as jwt from 'jsonwebtoken';
 import config from "@config/envConf";
-import { User } from "@interfaces/user";
+import { UserI } from "@interfaces/user";
 import { ErrorResponse } from "@utils/errorRespnse";
 
 
-export const generateAuthToken = (user: User): string => {
+export const generateAuthToken = (user: UserI): string => {
   try {
     return jwt.sign(
       {
-        id: user.ID,
+        id: user._id,
         isAdmin: user.isAdmin,
         iat: new Date().getTime(),
         expiresIn: config.JWT_EXPIRE
