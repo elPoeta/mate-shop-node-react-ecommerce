@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { ProductDocument } from '@interfaces/product';
+import { ProductType } from '@interfaces/product';
 
 const ProductSchema: Schema = new Schema(
   {
@@ -58,5 +58,5 @@ const ProductSchema: Schema = new Schema(
   }
 );
 
-export default model<ProductDocument>('Product', ProductSchema);
+export default model<ProductType>('Product', ProductSchema);
 
