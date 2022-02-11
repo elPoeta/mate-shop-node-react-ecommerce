@@ -1,34 +1,34 @@
 import UserModel from '@models/user';
-import { User, UserDocument } from '@interfaces/user';
+import { UserI, UserType } from '@interfaces/user';
 import { Types } from 'mongoose';
 
 export interface UserRepositoryI {
-  createNewUser(userParam: User): Promise<User>;
-  findByEmail(email: string): Promise<User | any>;
-  findById(id: string): Promise<User | any>;
+  createNewUser(userParam: UserI): Promise<UserI>;
+  findByEmail(email: string): Promise<UserI | any>;
+  findById(id: string): Promise<UserI | any>;
 }
 
 export const UserRepository: UserRepositoryI = {
-  async createNewUser(userParam: User) {
-    const user: UserDocument = new UserModel({
+  async createNewUser(userParam: UserI) {
+    const user: UserType = new UserModel({
       email: userParam.email,
       password: userParam.password,
       isAdmin: false
     });
     await user.save();
-    const userResponse: User = { ID: user._id, email: user.email, isAdmin: user.isAdmin };
+    const userResponse: UserI = user;
     return userResponse;
   },
   async findByEmail(email: string) {
-    const user: UserDocument | null = await UserModel.findOne({ email: email });
+    const user: UserType | null = await UserModel.findOne({ email: email }).select('-password');
     if (!user) return null;
-    const userResponse: User = { ID: user._id, email: user.email, isAdmin: user.isAdmin, password: user.password }
+    const userResponse: UserI = user;
     return userResponse;
   },
   async findById(id: string) {
-    const user: UserDocument | null = await UserModel.findById({ _id: new Types.ObjectId(id) });
+    const user: UserType | null = await UserModel.findById({ _id: new Types.ObjectId(id) }).select('-password');
     if (!user) return null;
-    const userResponse: User = { ID: user._id, email: user.email, isAdmin: user.isAdmin }
+    const userResponse: UserI = user;
     return userResponse;
   }
 

@@ -1,7 +1,7 @@
 import { Document, ObjectId } from "mongoose";
 
-export interface User {
-  ID: null | string | number | ObjectId;
+export interface UserI {
+  _id: string | number | ObjectId;
   email: string;
   password?: string;
   confirmPassword?: string | undefined;
@@ -11,4 +11,4 @@ export interface User {
 
 }
 
-export interface UserDocument extends User, Document { }
+export type UserType = UserI & Document;
