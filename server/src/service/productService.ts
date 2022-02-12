@@ -6,6 +6,7 @@ export interface ProductServiceI {
   createProduct(product: ProductI): Promise<ProductI>;
   getProduct(_id: number | string): Promise<ProductI | null>;
   updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null>;
+  deleteProduct(_id: number | string): Promise<boolean>;
 }
 
 export const ProductService: ProductServiceI = {
@@ -19,5 +20,9 @@ export const ProductService: ProductServiceI = {
 
   async updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null> {
     return await ProductRepository.updateProduct(_id, product);
+  },
+
+  async deleteProduct(_id: number | string): Promise<boolean> {
+    return await ProductRepository.deleteProduct(_id);
   }
 }

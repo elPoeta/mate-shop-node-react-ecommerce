@@ -6,7 +6,7 @@ export interface ProductRepositoryI {
   createProduct(product: ProductI): Promise<ProductI>;
   getProduct(_id: number | string): Promise<ProductI | null>;
   updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null>;
-
+  deleteProduct(_id: number | string): Promise<boolean>;
 }
 
 export const ProductRepository: ProductRepositoryI = {
@@ -23,11 +23,18 @@ export const ProductRepository: ProductRepositoryI = {
   },
 
   async updateProduct(_id: number | string | ObjectId, productParam: ProductI): Promise<ProductI | null> {
-    const productFound: ProductType | null = await ProductModel.findById({ _id });
-    if (!productFound) return null;
-    Object.assign(productFound, productParam);
-    await productFound.save();
-    await productFound.save()
-    return productFound as ProductI;
+    const product: ProductType | null = await ProductModel.findById({ _id });
+    if (!product) return null;
+    Object.assign(product, productParam);
+    await product.save();
+    await product.save()
+    return product as ProductI;
   },
+
+  async deleteProduct(_id: string): Promise<boolean> {
+    const product: ProductType | null = await ProductModel.findById({ _id });
+    if (!product) return false;
+    await product.remove();
+    return true;
+  }
 }
