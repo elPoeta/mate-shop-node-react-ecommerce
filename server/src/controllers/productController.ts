@@ -4,8 +4,17 @@ import { ProductI } from '@interfaces/product';
 import { ProductService } from '@service/productService';
 import { ErrorResponse } from '@utils/errorRespnse';
 
-export const geProducts = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).json([]);
+export const geProduct = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  const product: ProductI | null = await ProductService.getProduct(req.params.id);
+  if (!product) {
+    res.status(404);
+    throw new ErrorResponse(`Product not found id: ${req.params.id}`, 404);
+  }
+  res.status(200).json({
+    status: 200,
+    messges: 'Product found',
+    product
+  });
 });
 
 export const createProduct = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
