@@ -16,8 +16,7 @@ export const UserRepository: UserRepositoryI = {
       isAdmin: false
     });
     await user.save();
-    const userResponse: UserI = user;
-    return userResponse;
+    return user as UserI;
   },
   async findByEmail(email: string) {
     const user: UserType | null = await UserModel.findOne({ email: email }).select('-password');
@@ -28,8 +27,7 @@ export const UserRepository: UserRepositoryI = {
   async findById(id: string) {
     const user: UserType | null = await UserModel.findById({ _id: new Types.ObjectId(id) }).select('-password');
     if (!user) return null;
-    const userResponse: UserI = user;
-    return userResponse;
+    return user as UserI;
   }
 
 }
