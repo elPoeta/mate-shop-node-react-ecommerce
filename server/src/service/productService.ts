@@ -4,7 +4,7 @@ import { ObjectId } from "mongoose";
 
 export interface ProductServiceI {
   createProduct(product: ProductI): Promise<ProductI>;
-  getProduct(_id: number | string): Promise<ProductI | null>;
+  getProductById(_id: number | string): Promise<ProductI | null>;
   updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null>;
   deleteProduct(_id: number | string): Promise<boolean>;
 }
@@ -14,8 +14,8 @@ export const ProductService: ProductServiceI = {
     return await ProductRepository.createProduct(productParam);
   },
 
-  async getProduct(_id: number | string): Promise<ProductI | null> {
-    return await ProductRepository.getProduct(_id);
+  async getProductById(_id: number | string): Promise<ProductI | null> {
+    return await ProductRepository.getProductById(_id);
   },
 
   async updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null> {
