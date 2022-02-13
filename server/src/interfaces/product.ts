@@ -1,5 +1,5 @@
 import { ObjectId, Document } from "mongoose";
-
+import { ReviewI } from '@interfaces/review';
 export interface ProductI {
   _id: string | number | ObjectId;
   name: string;
@@ -18,6 +18,7 @@ export interface ProductI {
   rating: number;
   numReviews: number;
   discount: number;
+  reviews?: ReviewI[];
 }
 
 export type ProductType = ProductI & Document;

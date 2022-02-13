@@ -1,6 +1,22 @@
 import { model, Schema } from "mongoose";
 import { ProductType } from '@interfaces/product';
 
+const reviewSchema: Schema = new Schema(
+  {
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    user: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const ProductSchema: Schema = new Schema(
   {
     name: {
@@ -31,6 +47,7 @@ const ProductSchema: Schema = new Schema(
       min: 0,
       default: 0,
     },
+    reviews: [reviewSchema],
     numReviews: {
       type: Number,
       required: true,
