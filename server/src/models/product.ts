@@ -11,6 +11,7 @@ const ProductSchema: Schema = new Schema(
       type: String,
       required: true,
     },
+    alternateImages: [],
     brand: {
       type: String,
       required: true,
@@ -51,6 +52,17 @@ const ProductSchema: Schema = new Schema(
       min: 0,
       max: 100,
       default: 0
+    },
+    specifications: {
+      flavor: {
+        type: String
+      },
+      weight: {
+        type: Number
+      },
+      unit: {
+        type: String
+      }
     }
   },
   {
