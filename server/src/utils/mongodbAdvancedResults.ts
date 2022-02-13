@@ -25,7 +25,7 @@ interface QueryReq {
   limit?: string,
 }
 
-export const mongodbAdvancedResults = async (modelType: string, req: Request, populate: string | undefined): Promise<AdvancedResultsResponse> => {
+export const mongodbAdvancedResults = async (modelType: string, req: Request, populate?: string): Promise<AdvancedResultsResponse> => {
   let query;
   const model = mongoose.model(modelType);
   const reqQuery = { ...req.query };
