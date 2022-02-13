@@ -1,10 +1,13 @@
 import { ProductI, ProductType } from "@interfaces/product";
 import ProductModel from '@models/product';
+import { AdvancedResultsResponse, mongodbAdvancedResults } from "@utils/mongodbAdvancedResults";
+import { Request } from "express";
 import { ObjectId } from "mongoose";
 
 export interface ProductRepositoryI {
   createProduct(product: ProductI): Promise<ProductI>;
   getProductById(_id: number | string): Promise<ProductI | null>;
+  getProducts(req: Request): Promise<AdvancedResultsResponse>;
   updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null>;
   deleteProduct(_id: number | string): Promise<boolean>;
 }
@@ -14,6 +17,10 @@ export const ProductRepository: ProductRepositoryI = {
     const newProduct: ProductType = new ProductModel(productParam);
     await newProduct.save();
     return newProduct as ProductI;
+  },
+
+  async getProducts(req: Request): Promise<AdvancedResultsResponse> {
+    return await mongodbAdvancedResults('Product', req, 'reviews');
   },
 
   async getProductById(_id: string): Promise<ProductI | null> {

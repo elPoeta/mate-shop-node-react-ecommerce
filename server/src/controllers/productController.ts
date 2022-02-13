@@ -5,7 +5,7 @@ import { ProductService } from '@service/productService';
 import { ErrorResponse } from '@utils/errorRespnse';
 
 export const getProducts = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).json([]);
+  res.status(200).json(await ProductService.getProducts(req));
 });
 
 export const geProductById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
