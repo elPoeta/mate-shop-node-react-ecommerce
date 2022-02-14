@@ -10,6 +10,7 @@ import { UserI } from "@interfaces/user";
 interface CustomRequest extends Request {
   user?: {
     id: null | string | number | ObjectId;
+    name: string;
     isAdmin: boolean,
     email: string;
   };
@@ -28,6 +29,7 @@ export const protectedRoute = asyncHandler(async (req: CustomRequest, res: Respo
       }
       req.user = {
         id: user._id,
+        name: user.name,
         isAdmin: user.isAdmin,
         email: user.email
       }

@@ -8,7 +8,7 @@ import { generateAuthToken } from "@utils/tokenManager";
 import { matchPassword } from "@utils/userPasswordManager";
 
 export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const body: UserI = req.body as Pick<UserI, "_id" | "email" | "password" | "isAdmin" | "confirmPassword">;
+  const body: UserI = req.body as Pick<UserI, "_id" | "name" | "email" | "password" | "isAdmin" | "confirmPassword">;
   if (!body.password?.length || !body.confirmPassword?.length || body.confirmPassword !== body.password) {
     res.status(400);
     throw new ErrorResponse('Error password not match', 400);
@@ -28,9 +28,7 @@ export const login = asyncHandler(async (req: Request, res: Response, next: Next
 });
 
 const sendTokenResponse = (user: UserI, statusCode: number, res: Response) => {
-  console.log("USER ", user)
   const token = generateAuthToken(user);
-
   const options: CookieOptions = {
     expires: new Date(
       Date.now() + config.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
