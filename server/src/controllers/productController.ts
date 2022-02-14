@@ -59,3 +59,12 @@ export const deleteProduct = asyncHandler(async (req: Request, res: Response, ne
     deleted
   });
 });
+
+export const getTopProducts = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  const products: ProductI[] | [] = await ProductService.getTopProducts();
+  res.status(200).json({
+    status: 200,
+    messages: "Top products",
+    products
+  });
+});

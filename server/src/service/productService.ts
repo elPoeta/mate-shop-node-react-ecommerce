@@ -10,6 +10,7 @@ export interface ProductServiceI {
   getProducts(req: Request): Promise<AdvancedResultsResponse>;
   updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null>;
   deleteProduct(_id: number | string): Promise<boolean>;
+  getTopProducts(): Promise<ProductI[] | []>;
 }
 
 export const ProductService: ProductServiceI = {
@@ -31,5 +32,9 @@ export const ProductService: ProductServiceI = {
 
   async deleteProduct(_id: number | string): Promise<boolean> {
     return await ProductRepository.deleteProduct(_id);
+  },
+
+  async getTopProducts(): Promise<ProductI[] | []> {
+    return await ProductRepository.getTopProducts();
   }
 }
