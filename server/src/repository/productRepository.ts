@@ -10,6 +10,7 @@ export interface ProductRepositoryI {
   getProducts(req: Request): Promise<AdvancedResultsResponse>;
   updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null>;
   deleteProduct(_id: number | string): Promise<boolean>;
+  getTopProducts(): Promise<ProductI[] | []>;
 }
 
 export const ProductRepository: ProductRepositoryI = {
@@ -43,5 +44,10 @@ export const ProductRepository: ProductRepositoryI = {
     if (!product) return false;
     await product.remove();
     return true;
+  },
+
+  async getTopProducts(): Promise<ProductI[] | []> {
+    const products: ProductType[] | [] = await ProductModel.find({}).sort({ rating: -1 }).limit(5);
+    return products as ProductI[];
   }
 }
