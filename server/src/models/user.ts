@@ -4,6 +4,12 @@ import { UserType } from '@interfaces/user';
 
 const UserSchema: Schema = new Schema(
   {
+    name: {
+      type: String,
+      minlength: 3,
+      maxlength: 255,
+      required: true
+    },
     email: {
       type: String,
       minlength: 5,

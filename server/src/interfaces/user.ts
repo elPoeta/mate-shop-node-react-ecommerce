@@ -2,6 +2,7 @@ import { Document, ObjectId } from "mongoose";
 
 export interface UserI {
   _id: string | number | ObjectId;
+  name: string;
   email: string;
   password?: string;
   confirmPassword?: string | undefined;

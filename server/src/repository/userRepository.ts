@@ -11,6 +11,7 @@ export interface UserRepositoryI {
 export const UserRepository: UserRepositoryI = {
   async createNewUser(userParam: UserI) {
     const user: UserType = new UserModel({
+      name: userParam.name,
       email: userParam.email,
       password: userParam.password,
       isAdmin: false
