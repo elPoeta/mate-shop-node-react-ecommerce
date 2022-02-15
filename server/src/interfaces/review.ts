@@ -4,7 +4,7 @@ export interface ReviewI {
   name: string;
   rating: number;
   comment: string;
-  user: number | Schema.Types.ObjectId,
+  user: number | string | Schema.Types.ObjectId;
 }
 
 export type ReviewType = ReviewI & Document; 
