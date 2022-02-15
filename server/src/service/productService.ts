@@ -1,4 +1,5 @@
 import { ProductI } from "@interfaces/product"
+import { UserRequest } from "@interfaces/user";
 import { ProductRepository } from "@repository/productRepository"
 import { AdvancedResultsResponse } from "@utils/mongodbAdvancedResults";
 import { Request } from "express";
@@ -11,6 +12,7 @@ export interface ProductServiceI {
   updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null>;
   deleteProduct(_id: number | string): Promise<boolean>;
   getTopProducts(): Promise<ProductI[] | []>;
+  createProductReview(productId: string, user: UserRequest, rating: number, comment: string): Promise<ProductI | null>;
 }
 
 export const ProductService: ProductServiceI = {
@@ -36,5 +38,9 @@ export const ProductService: ProductServiceI = {
 
   async getTopProducts(): Promise<ProductI[] | []> {
     return await ProductRepository.getTopProducts();
+  },
+
+  async createProductReview(productId: string, user: UserRequest, rating: number, comment: string): Promise<ProductI | null> {
+    return await ProductRepository.createProductReview(productId, user, rating, comment);
   }
 }
