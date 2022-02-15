@@ -4,7 +4,7 @@ import { UserRequest } from "@interfaces/user";
 import ProductModel from '@models/product';
 import { AdvancedResultsResponse, mongodbAdvancedResults } from "@utils/mongodbAdvancedResults";
 import { Request } from "express";
-import { ObjectId, Types } from "mongoose";
+import { ObjectId } from "mongoose";
 
 export interface ProductRepositoryI {
   createProduct(product: ProductI): Promise<ProductI>;
@@ -13,7 +13,7 @@ export interface ProductRepositoryI {
   updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null>;
   deleteProduct(_id: number | string): Promise<boolean>;
   getTopProducts(): Promise<ProductI[] | []>;
-  createProductReview(productId: string, user: UserRequest, rating: number, comment: string): Promise<ProductI | null>;
+  createProductReview(productId: string, user: UserRequest | undefined, rating: number, comment: string): Promise<ProductI | null>;
 }
 
 export const ProductRepository: ProductRepositoryI = {
@@ -54,9 +54,10 @@ export const ProductRepository: ProductRepositoryI = {
     return products as ProductI[];
   },
 
-  async createProductReview(productId: string, user: UserRequest, rating: number, comment: string): Promise<ProductI | null> {
+  async createProductReview(productId: string, user: UserRequest | undefined, rating: number, comment: string): Promise<ProductI | null> {
     const product: ProductType | null = await ProductModel.findById(productId);
 
+    if (!user) return null;
     if (!user.id) return null;
     if (!product) return null;
 

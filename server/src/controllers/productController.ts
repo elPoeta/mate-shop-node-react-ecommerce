@@ -3,6 +3,7 @@ import asyncHandler from '@middlewares/asyncHandler';
 import { ProductI } from '@interfaces/product';
 import { ProductService } from '@service/productService';
 import { ErrorResponse } from '@utils/errorRespnse';
+import { CustomRequest } from '@middlewares/authMiddleware';
 
 export const getProducts = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   res.status(200).json(await ProductService.getProducts(req));
@@ -67,4 +68,20 @@ export const getTopProducts = asyncHandler(async (req: Request, res: Response, n
     messages: "Top products",
     products
   });
+});
+
+export const createProductReview = asyncHandler(async (req: CustomRequest, res: Response, next: NextFunction) => {
+  const productId = req.params.id;
+  const { rating, commnent } = req.body;
+  const product: ProductI | null = await ProductService.createProductReview(productId, req.user, rating, commnent);
+  if (!product) {
+    res.status(404);
+    throw new ErrorResponse('Product not found', 404);
+  }
+  res.status(201).json({
+    status: 201,
+    messages: 'product review created',
+    product
+  })
+
 });

@@ -12,7 +12,7 @@ export interface ProductServiceI {
   updateProduct(_id: number | string | ObjectId, product: ProductI): Promise<ProductI | null>;
   deleteProduct(_id: number | string): Promise<boolean>;
   getTopProducts(): Promise<ProductI[] | []>;
-  createProductReview(productId: string, user: UserRequest, rating: number, comment: string): Promise<ProductI | null>;
+  createProductReview(productId: string, user: UserRequest | undefined, rating: number, comment: string): Promise<ProductI | null>;
 }
 
 export const ProductService: ProductServiceI = {
@@ -40,7 +40,7 @@ export const ProductService: ProductServiceI = {
     return await ProductRepository.getTopProducts();
   },
 
-  async createProductReview(productId: string, user: UserRequest, rating: number, comment: string): Promise<ProductI | null> {
+  async createProductReview(productId: string, user: UserRequest | undefined, rating: number, comment: string): Promise<ProductI | null> {
     return await ProductRepository.createProductReview(productId, user, rating, comment);
   }
 }

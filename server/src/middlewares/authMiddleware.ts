@@ -6,7 +6,7 @@ import asyncHandler from "./asyncHandler";
 import { UserRepository } from "@repository/userRepository";
 import { UserI, UserRequest } from "@interfaces/user";
 
-interface CustomRequest extends Request {
+export interface CustomRequest extends Request {
   user?: UserRequest;
 }
 
