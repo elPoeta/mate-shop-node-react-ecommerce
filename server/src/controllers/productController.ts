@@ -72,8 +72,8 @@ export const getTopProducts = asyncHandler(async (req: Request, res: Response, n
 
 export const createProductReview = asyncHandler(async (req: CustomRequest, res: Response, next: NextFunction) => {
   const productId = req.params.id;
-  const { rating, commnent } = req.body;
-  const product: ProductI | null = await ProductService.createProductReview(productId, req.user, rating, commnent);
+  const { rating, comment } = req.body;
+  const product: ProductI | null = await ProductService.createProductReview(productId, req.user, rating, comment);
   if (!product) {
     res.status(404);
     throw new ErrorResponse('Product not found', 404);
