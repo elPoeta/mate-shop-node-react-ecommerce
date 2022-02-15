@@ -50,4 +50,5 @@ export const ProductRepository: ProductRepositoryI = {
     const products: ProductType[] | [] = await ProductModel.find({}).sort({ rating: -1 }).limit(5);
     return products as ProductI[];
   }
+
 }
