@@ -13,3 +13,10 @@ export interface UserI {
 }
 
 export type UserType = UserI & Document;
+
+export interface UserRequest {
+  id: null | string | number | ObjectId;
+  name: string;
+  isAdmin: boolean,
+  email: string;
+}

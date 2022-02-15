@@ -2,18 +2,12 @@ import { ErrorResponse } from "@utils/errorRespnse";
 import config from "@config/envConf";
 import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
-import { ObjectId } from "mongoose";
 import asyncHandler from "./asyncHandler";
 import { UserRepository } from "@repository/userRepository";
-import { UserI } from "@interfaces/user";
+import { UserI, UserRequest } from "@interfaces/user";
 
 interface CustomRequest extends Request {
-  user?: {
-    id: null | string | number | ObjectId;
-    name: string;
-    isAdmin: boolean,
-    email: string;
-  };
+  user?: UserRequest;
 }
 
 export const protectedRoute = asyncHandler(async (req: CustomRequest, res: Response, next: NextFunction) => {
