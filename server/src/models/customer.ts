@@ -15,26 +15,32 @@ const CustomerSchema = new Schema({
   address: {
     type: [
       {
+        country: {
+          type: String,
+          required: true
+        },
+        city: {
+          type: String,
+          required: true
+        },
         street: {
           type: String,
-          minlength: 5,
-          maxlength: 255,
           required: true
         },
         number: {
           type: Number,
-          min: 0,
           required: true
         },
-        location: {
+        postalCode: {
           type: String,
-          minlength: 5,
-          maxlength: 255,
           required: true
-        }
+        },
       }
     ],
   }
-});
+},
+  {
+    timestamps: true,
+  });
 
 export default model<CustomerType>('Customer', CustomerSchema);

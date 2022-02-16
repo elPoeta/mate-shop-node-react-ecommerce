@@ -1,9 +1,11 @@
 import { Document, Schema } from "mongoose";
 
 export type Address = {
+  country: string,
+  city: string,
   street: string,
   number: number,
-  location: string
+  postalCode: string
 }
 
 export interface CustomerI {
