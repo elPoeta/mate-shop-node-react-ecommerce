@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc && node server/dist/index.js",
-    "dev": "nodemon -e ts --exec \"npm run compile\""
+    "server": "nodemon -e ts --exec \"npm run compile\"",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "_moduleAliases": {
     "@config": "server/dist/config",
@@ -43,6 +45,7 @@
     "@types/jsonwebtoken": "^8.5.8",
     "@types/mongodb": "^4.0.7",
     "@types/mongoose": "^5.11.97",
+    "concurrently": "^7.0.0",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.5"
