@@ -3,7 +3,8 @@
     ".git",
     "node_modules/",
     "dist/",
-    "coverage"
+    "coverage",
+    "client/"
   ],
   "watch": [
     "server/src/*"
