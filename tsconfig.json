@@ -94,7 +94,11 @@
     "skipLibCheck": true, /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
+  "include": [
+    "server/src"
+  ],
   "exclude": [
-    "server/src/interfaces/*.ts"
+    "server/src/interfaces/*.ts",
+    "client/*.*",
   ]
 }
