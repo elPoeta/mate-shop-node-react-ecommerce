@@ -4,7 +4,7 @@ import { Types } from 'mongoose';
 
 export interface UserRepositoryI {
   createNewUser(userParam: UserI): Promise<UserI>;
-  findByEmail(email: string): Promise<UserI | any>;
+  findByEmail(email: string): Promise<UserI | null>;
   findById(id: string): Promise<UserI | any>;
 }
 
@@ -19,11 +19,10 @@ export const UserRepository: UserRepositoryI = {
     await user.save();
     return user as UserI;
   },
-  async findByEmail(email: string) {
-    const user: UserType | null = await UserModel.findOne({ email: email }).select('-password');
+  async findByEmail(email: string): Promise<UserI | null> {
+    const user: UserType | null = await UserModel.findOne({ email: email });
     if (!user) return null;
-    const userResponse: UserI = user;
-    return userResponse;
+    return user as UserI;
   },
   async findById(id: string) {
     const user: UserType | null = await UserModel.findById({ _id: new Types.ObjectId(id) }).select('-password');

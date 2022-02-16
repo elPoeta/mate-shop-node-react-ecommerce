@@ -7,7 +7,7 @@ import { ErrorResponse } from "@utils/errorRespnse";
 import { generateAuthToken } from "@utils/tokenManager";
 import { matchPassword } from "@utils/userPasswordManager";
 
-export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const body: UserI = req.body as Pick<UserI, "_id" | "name" | "email" | "password" | "isAdmin" | "confirmPassword">;
   if (!body.password?.length || !body.confirmPassword?.length || body.confirmPassword !== body.password) {
     res.status(400);
@@ -17,14 +17,14 @@ export const register = asyncHandler(async (req: Request, res: Response, next: N
   sendTokenResponse(user, 201, res);
 });
 
-export const login = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
-  const user: UserI | any = UserService.findByEmail(email);
-  if (!user && (await !matchPassword(password, user.password))) {
+  const user: UserI | null = await UserService.findByEmail(email);
+  if (!user || await !matchPassword(password, user.password ? user.password : '')) {
     res.status(401)
     throw new Error('Invalid email or password');
   }
-  sendTokenResponse(user, 201, res);
+  sendTokenResponse(user, 200, res);
 });
 
 const sendTokenResponse = (user: UserI, statusCode: number, res: Response) => {
