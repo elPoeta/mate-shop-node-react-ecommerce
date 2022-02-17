@@ -1,8 +1,9 @@
+import './styles/App.scss';
 
 const App = () => {
   return (
     <div>
-      Mate Shop!
+      <h1>Mate Shop!</h1>
     </div>
   );
 }
