@@ -4,7 +4,7 @@
     {
       "format": "expanded",
       "extensionName": ".css",
-      "savePath": "~/../../client/src/styles/css"
+      "savePath": "/client/src/styles/css"
     },
     // // You can add more
     // {
