@@ -1,5 +1,6 @@
-@use './abstratcs/' as *;
+@use './abstratcs' as *;
 
 h1 {
   color: $green-color-800;
+  font-weight: map-get($font-weights, "bold");
 }
