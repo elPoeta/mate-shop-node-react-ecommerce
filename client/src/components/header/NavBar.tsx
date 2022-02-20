@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { UserIcon, ShoppingCartIcon } from '@heroicons/react/solid';
 
 const NavBar: React.FC = (): JSX.Element => {
   return (
-    <div>NavBar</div>
+    <div className='header_navBar'>
+      <UserIcon className='header_navBar_icon' />
+      <ShoppingCartIcon className='header_navBar_icon' />
+    </div>
   )
 }
 

@@ -41,6 +41,7 @@ background-color: $green-color-100;
     border: 2px solid $green-color-900;
     border-radius: 5px;
     border-right: none;
+    width: 88%;
   }
 
   button {
@@ -54,5 +55,17 @@ background-color: $green-color-100;
     .header_search_bar_icon {
        color: $green-color-100;
     }
+  }
+}
+
+.header_navBar {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  .header_navBar_icon {
+    width: 2rem;
+    color: $green-color-900;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
