@@ -1,0 +1,58 @@
+@use './abstratcs' as *;
+
+.header {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 5px;
+border-bottom: 2px solid $green-color-800;
+padding-bottom: 5px;
+background-color: $green-color-100;
+.header_brand  {  
+    display: grid;
+    grid-template-columns: 32px 1fr;
+  }
+  &_hamburger {
+    width: 2rem;
+    height: 2rem;
+    color: $green-color-900;
+  }
+  h1 {
+    color: $green-color-900;
+    font-weight: map-get($font-weights, "bold");
+    font-size: 1.3rem;
+
+    .header_logo {
+      width: 1.5rem;
+      height: 1.5rem;
+      position: relative;
+      top: 3px;
+    }
+  }
+}
+
+.header_search_bar {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+
+  input {
+    padding: 8px;
+    outline: none;
+    border: 2px solid $green-color-900;
+    border-radius: 5px;
+    border-right: none;
+  }
+
+  button {
+    outline: none;
+    width: 2rem;
+    border-radius: 5px;
+    position: relative;
+    left: -3px;
+    background-color: $green-color-800;
+
+    .header_search_bar_icon {
+       color: $green-color-100;
+    }
+  }
+}
