@@ -2,6 +2,8 @@
 
 @include media-md {
  .header {
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 60px;
    &_hamburger {
        display: none;
    }
@@ -17,11 +19,30 @@
       top: 6px;
     }
   }
- }
- 
- .header_navBar {
+}
+
+.header_navBar {
+   grid-column: 3 / -1;
   .header_navBar_icon {
     width: 2.5rem;
   }
  }
+
+ .header_search_bar {
+   grid-column: 2 / 2;
+   grid-row: 1 / 1;
+   align-items: flex-end;
+   width: 100%;
+   
+   input{
+     padding: 14px;
+   }
+
+   button {
+    width: 2.8rem;
+    border-radius: 10px;
+    left: -10px;
+   }
+  }
+
 }
