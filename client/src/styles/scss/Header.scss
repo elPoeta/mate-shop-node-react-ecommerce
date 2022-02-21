@@ -1,13 +1,13 @@
 @use './abstratcs' as *;
 
 .header {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 5px;
-border-bottom: 2px solid $green-color-800;
-padding-bottom: 5px;
-background-color: $green-color-100;
-.header_brand  {  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  border-bottom: 2px solid $green-color-800;
+  padding-bottom: 5px;
+  background-color: $green-color-100;
+  &_brand  {  
     display: grid;
     grid-template-columns: 32px 1fr;
   }
@@ -67,5 +67,9 @@ background-color: $green-color-100;
     color: $green-color-900;
     padding-left: 5px;
     padding-right: 5px;
+  }
+  .header_navBar_icon:last-child {
+    position: relative;
+    top:3px;
   }
 }
