@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import * as bcrypt from 'bcryptjs';
+import * as argon2 from "argon2";
 import { UserType } from '@interfaces/user';
 
 const UserSchema: Schema = new Schema(
@@ -44,8 +44,7 @@ UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();
   }
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  this.password = await argon2.hash(this.password);
 });
 
 export default model<UserType>("User", UserSchema);
