@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { LoginFormData } from '../../interfaces/loginFormData';
 import authService from './authService';
+import { UserI } from './userI';
 
 interface State {
-  user: {} | null;
+  user: UserI | null;
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
@@ -11,7 +12,7 @@ interface State {
 }
 
 const initialState = {
-  user: {},
+  user: null,
   isError: false,
   isSuccess: false,
   isLoading: false,

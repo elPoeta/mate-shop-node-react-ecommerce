@@ -23,8 +23,7 @@ const Login: React.FC = (): JSX.Element => {
     }
 
     if (isSuccess || user) {
-      // navigate('/')
-      console.log("USER ", user)
+      navigate('/')
     }
 
     dispatch(reset())
