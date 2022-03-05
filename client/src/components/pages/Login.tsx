@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { reset, login } from '../../features/auth/authSlice';
 import { LoginFormData } from '../../interfaces/loginFormData';
+import Spinner from '../common/Spinner';
 import LoginForm from '../user/LoginForm';
 
 const Login: React.FC = (): JSX.Element => {
@@ -35,7 +36,6 @@ const Login: React.FC = (): JSX.Element => {
       email,
       password,
     }
-    console.log("DATA SUBMIT ", userData)
     dispatch(login(userData));
   }
 
@@ -49,7 +49,7 @@ const Login: React.FC = (): JSX.Element => {
   }
 
   if (isLoading) {
-    return <h2>LOADING...</h2>
+    return <Spinner className='spinner-wave' />
   }
 
   return (
