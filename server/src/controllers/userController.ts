@@ -8,7 +8,7 @@ import { generateAuthToken } from "@utils/tokenManager";
 import { matchPassword } from "@utils/userPasswordManager";
 
 export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const body: UserI = req.body as Pick<UserI, "_id" | "name" | "email" | "password" | "isAdmin" | "confirmPassword">;
+  const body: UserI = req.body;
   if (!body.password?.length || !body.confirmPassword?.length || body.confirmPassword !== body.password) {
     res.status(400);
     throw new ErrorResponse('Error password not match', 400);
@@ -19,15 +19,25 @@ export const register = asyncHandler(async (req: Request, res: Response, next: N
 
 export const login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
+  console.log('userlog ', req.body);
   const user: UserI | null = await UserService.findByEmail(email);
-  if (!user || await !matchPassword(password, user.password ? user.password : '')) {
+  console.log('userI ', user);
+  if (!user) {
     res.status(401)
     throw new Error('Invalid email or password');
   }
-  sendTokenResponse(user, 200, res);
+  const userPassword: string = user.password ? user.password : '';
+  const match: boolean = await matchPassword(password, userPassword);
+  if (match) {
+    sendTokenResponse(user, 200, res);
+  } else {
+    res.status(401)
+    throw new Error('Invalid email or password');
+  }
 });
 
 const sendTokenResponse = (user: UserI, statusCode: number, res: Response) => {
+  console.log("response token ", user)
   const token = generateAuthToken(user);
   const options: CookieOptions = {
     expires: new Date(

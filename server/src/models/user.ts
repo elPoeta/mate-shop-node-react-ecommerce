@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose";
 import * as argon2 from "argon2";
-import { UserType } from '@interfaces/user';
+import { UserI } from '@interfaces/user';
 
-const UserSchema: Schema = new Schema(
+const UserSchema: Schema = new Schema<UserI>(
   {
     name: {
       type: String,
@@ -47,4 +47,4 @@ UserSchema.pre('save', async function (next) {
   this.password = await argon2.hash(this.password);
 });
 
-export default model<UserType>("User", UserSchema);
+export default model<UserI>("User", UserSchema);
