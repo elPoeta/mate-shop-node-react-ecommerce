@@ -17,11 +17,10 @@ export const UserRepository: UserRepositoryI = {
       isAdmin: false
     });
     await user.save();
-    return user as UserI;
+    return user;
   },
   async findByEmail(email: string): Promise<UserI | null> {
     const user: UserI | null = await UserModel.findOne({ email: email }, 'email isAdmin name password');
-    console.log("USER-REPO ", user)
     if (!user) return null;
     return user;
   },

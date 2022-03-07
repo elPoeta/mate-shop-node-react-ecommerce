@@ -19,7 +19,6 @@ export const register = asyncHandler(async (req: Request, res: Response, next: N
 
 export const login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
-  console.log('userlog ', req.body);
   const user: UserI | null = await UserService.findByEmail(email);
   console.log('userI ', user);
   if (!user) {
@@ -37,7 +36,6 @@ export const login = asyncHandler(async (req: Request, res: Response, next: Next
 });
 
 const sendTokenResponse = (user: UserI, statusCode: number, res: Response) => {
-  console.log("response token ", user)
   const token = generateAuthToken(user);
   const options: CookieOptions = {
     expires: new Date(
