@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { reset, login } from '../../features/auth/authSlice';
-import { LoginFormData } from '../../interfaces/loginFormData';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { reset, register } from '../../features/auth/authSlice';
+import { RegisterFormData } from '../../interfaces/loginFormData';
 import Spinner from '../common/Spinner';
-import LoginForm from '../user/LoginForm';
+import RegisterForm from '../user/RegisterForm';
 
-const Login: React.FC = (): JSX.Element => {
-  const [formData, setFormdata] = useState({ email: '', password: '' });
+const Register: React.FC = (): JSX.Element => {
+  const [formData, setFormdata] = useState({ name: '', email: '', password: '', confirmPassword: '' });
 
-  const { email, password } = formData;
+  const { name, email, password, confirmPassword } = formData;
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch();
 
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
     (state) => state.auth
-  )
+  );
 
   useEffect(() => {
     if (isError) {
@@ -32,11 +32,13 @@ const Login: React.FC = (): JSX.Element => {
 
   const handleSubmit = (ev: React.FormEvent): void => {
     ev.preventDefault();
-    const userData: LoginFormData = {
+    const userData: RegisterFormData = {
+      name,
       email,
       password,
+      confirmPassword
     }
-    dispatch(login(userData));
+    dispatch(register(userData));
   }
 
   const handleChange = (ev: React.FormEvent): void => {
@@ -54,17 +56,13 @@ const Login: React.FC = (): JSX.Element => {
 
   return (
     <div>
-      <section>
-        <LoginForm
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          formData={formData}
-        />
-      </section>
-      <Link to='/register'>Sign up</Link>
-
+      <RegisterForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formData={formData}
+      />
     </div>
   )
 }
 
-export default Login;
+export default Register;
