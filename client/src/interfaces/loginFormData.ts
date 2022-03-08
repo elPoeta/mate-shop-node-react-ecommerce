@@ -4,5 +4,6 @@ export interface LoginFormData {
 }
 
 export interface RegisterFormData extends LoginFormData {
+  name: string;
   confirmPassword: string;
 }

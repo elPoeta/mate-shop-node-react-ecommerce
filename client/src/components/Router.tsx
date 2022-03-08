@@ -4,6 +4,7 @@ import Header from './header/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
+import Register from './pages/Register';
 
 const Router: React.FC = (): JSX.Element => (
   <>
@@ -12,6 +13,7 @@ const Router: React.FC = (): JSX.Element => (
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/notFound' element={<NotFound />} />
         <Route path="*" element={<Navigate to="notFound" />} />
       </Routes>
