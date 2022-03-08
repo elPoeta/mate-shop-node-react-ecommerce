@@ -1,10 +1,8 @@
 import { Schema, Document } from "mongoose";
 
-export interface ReviewI {
+export interface ReviewI extends Document {
   name: string;
   rating: number;
   comment: string;
-  user: number | string | Schema.Types.ObjectId;
+  user: Schema.Types.ObjectId;
 }
-
-export type ReviewType = ReviewI & Document; 

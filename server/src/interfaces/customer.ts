@@ -8,10 +8,8 @@ export type Address = {
   postalCode: string
 }
 
-export interface CustomerI {
+export interface CustomerI extends Document {
   user: Schema.Types.ObjectId;
   phone: string;
   address: Address[];
 }
-
-export type CustomerType = CustomerI & Document;

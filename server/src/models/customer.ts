@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
-import { CustomerType } from '@interfaces/customer';
+import { CustomerI } from '@interfaces/customer';
 
-const CustomerSchema = new Schema({
+const CustomerSchema = new Schema<CustomerI>({
   user: {
     type: Schema.Types.ObjectId,
     ref: "user"
@@ -43,4 +43,4 @@ const CustomerSchema = new Schema({
     timestamps: true,
   });
 
-export default model<CustomerType>('Customer', CustomerSchema);
+export default model<CustomerI>('Customer', CustomerSchema);

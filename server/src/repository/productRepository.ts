@@ -1,5 +1,5 @@
-import { ProductI, ProductType } from "@interfaces/product";
-import { ReviewI, ReviewType } from "@interfaces/review";
+import { ProductI } from "@interfaces/product";
+import { ReviewI } from "@interfaces/review";
 import { UserRequest } from "@interfaces/user";
 import ProductModel from '@models/product';
 import { AdvancedResultsResponse, mongodbAdvancedResults } from "@utils/mongodbAdvancedResults";
@@ -18,9 +18,9 @@ export interface ProductRepositoryI {
 
 export const ProductRepository: ProductRepositoryI = {
   async createProduct(productParam: ProductI): Promise<ProductI> {
-    const newProduct: ProductType = new ProductModel(productParam);
+    const newProduct: ProductI = new ProductModel(productParam);
     await newProduct.save();
-    return newProduct as ProductI;
+    return newProduct;
   },
 
   async getProducts(req: Request): Promise<AdvancedResultsResponse> {
@@ -28,50 +28,50 @@ export const ProductRepository: ProductRepositoryI = {
   },
 
   async getProductById(_id: string): Promise<ProductI | null> {
-    const product: ProductType | null = await ProductModel.findById({ _id });
+    const product: ProductI | null = await ProductModel.findById({ _id });
     if (!product) return null;
-    return product as ProductI;
+    return product;
   },
 
   async updateProduct(_id: number | string | ObjectId, productParam: ProductI): Promise<ProductI | null> {
-    const product: ProductType | null = await ProductModel.findById({ _id });
+    const product: ProductI | null = await ProductModel.findById({ _id });
     if (!product) return null;
     Object.assign(product, productParam);
     await product.save();
     await product.save()
-    return product as ProductI;
+    return product;
   },
 
   async deleteProduct(_id: string): Promise<boolean> {
-    const product: ProductType | null = await ProductModel.findById({ _id });
+    const product: ProductI | null = await ProductModel.findById({ _id });
     if (!product) return false;
     await product.remove();
     return true;
   },
 
   async getTopProducts(): Promise<ProductI[] | []> {
-    const products: ProductType[] | [] = await ProductModel.find({}).sort({ rating: -1 }).limit(5);
-    return products as ProductI[];
+    const products: ProductI[] | [] = await ProductModel.find({}).sort({ rating: -1 }).limit(5);
+    return products;
   },
 
   async createProductReview(productId: string, user: UserRequest | undefined, rating: number, comment: string): Promise<ProductI | null> {
-    const product: ProductType | null = await ProductModel.findById(productId);
+    const product: ProductI | null = await ProductModel.findById(productId);
 
     if (!user) return null;
     if (!user.id) return null;
     if (!product) return null;
 
     product.reviews = product.reviews ? product.reviews : [];
-    const alreadyReviewed = product.reviews.find(r => r.user.toString() === user.id);
+    const alreadyReviewed = product.reviews.find(r => r.user.toString() === user.id.toString());
 
     if (alreadyReviewed) return null;
 
-    const review: ReviewI = {
+    const review = {
       name: user.name,
       rating: Number(rating),
       comment,
       user: user.id
-    }
+    } as ReviewI;
 
     product.reviews.push(review);
 
@@ -82,7 +82,7 @@ export const ProductRepository: ProductRepositoryI = {
       product.reviews.length;
 
     await product.save();
-    return product as ProductI;
+    return product;
   }
 
 }
