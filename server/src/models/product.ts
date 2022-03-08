@@ -1,7 +1,8 @@
 import { model, Schema } from "mongoose";
-import { ProductType } from '@interfaces/product';
+import { ProductI } from '@interfaces/product';
+import { ReviewI } from "@interfaces/review";
 
-const reviewSchema: Schema = new Schema(
+const reviewSchema: Schema = new Schema<ReviewI>(
   {
     name: { type: String, required: true },
     rating: { type: Number, required: true },
@@ -17,7 +18,7 @@ const reviewSchema: Schema = new Schema(
   }
 );
 
-const ProductSchema: Schema = new Schema(
+const ProductSchema: Schema = new Schema<ProductI>(
   {
     name: {
       type: String,
@@ -87,5 +88,5 @@ const ProductSchema: Schema = new Schema(
   }
 );
 
-export default model<ProductType>('Product', ProductSchema);
+export default model<ProductI>('Product', ProductSchema);
 

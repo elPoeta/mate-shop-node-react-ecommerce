@@ -1,7 +1,6 @@
-import { ObjectId, Document } from "mongoose";
+import { Document } from "mongoose";
 import { ReviewI } from '@interfaces/review';
-export interface ProductI {
-  _id: string | number | ObjectId;
+export interface ProductI extends Document {
   name: string;
   image: string;
   alternateImages: string[];
@@ -20,5 +19,3 @@ export interface ProductI {
   discount: number;
   reviews?: ReviewI[];
 }
-
-export type ProductType = ProductI & Document;

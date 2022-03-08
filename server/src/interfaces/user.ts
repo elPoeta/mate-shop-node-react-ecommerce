@@ -10,7 +10,7 @@ export interface UserI extends Document {
   isAdmin: boolean;
 }
 export interface UserRequest {
-  id: null | string | number | ObjectId;
+  id: ObjectId;
   name: string;
   isAdmin: boolean,
   email: string;
