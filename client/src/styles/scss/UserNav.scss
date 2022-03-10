@@ -1,0 +1,38 @@
+@use './abstratcs/' as *;
+
+.header_user-nav {
+  position: absolute;
+  top: 40px;
+  width: 200px;
+  background: $green-color-600;
+  z-index: 1;
+  padding: 10px;
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 30%), 0 0.0625rem 0.125rem rgb(0 0 0 / 20%);
+  ::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 100%;
+    right: 35px;
+    border: .75rem solid transparent;
+    border-top: none;
+    border-bottom-color: $green-color-600;
+    filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
+  }
+  p {
+    color: $green-color-900;
+    font-size: 1rem;
+    font-weight: map-get($font-weights, "thin");
+  }
+  .header_user-nav-menu {
+    list-style: none;
+    font-size: 1.2rem;
+    color: $green-color-100;
+
+    li {
+       padding: 5px 0;
+    }
+  }
+
+}
