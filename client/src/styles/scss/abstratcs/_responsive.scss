@@ -45,4 +45,10 @@
    }
   }
 
+  .header_user-nav {
+    top:55px;
+    ::before {
+      right: 45px;
+    }
+  }
 }
