@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { logout } from '../../features/auth/authSlice';
+import { logout, reset } from '../../features/auth/authSlice';
 import { UserI } from '../../features/auth/userI';
 import '../../styles/scss/UserNav.scss';
 import Spinner from '../common/Spinner';
@@ -28,7 +28,8 @@ const UserNav: React.FC<Props> = (props): JSX.Element => {
       navigate('/')
       toggleMenu();
     }
-  }, [user, isError, isSuccess, message, navigate, toggleMenu])
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch, toggleMenu])
 
   if (isLoading) {
     return <Spinner className='spinner-wave' />
