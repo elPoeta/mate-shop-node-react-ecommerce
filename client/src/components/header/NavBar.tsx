@@ -9,13 +9,17 @@ const NavBar: React.FC = (): JSX.Element => {
   const user: UserI = useAppSelector(state => state.auth).user || { id: '', isAdmin: false, iat: new Date(), expiresIn: new Date() };
   const [toggleMenu, setToggleMenu] = useState(false);
 
+  const handleToggleMenu = () => {
+    setToggleMenu(() => !toggleMenu);
+  }
+
   return (
     <div className='header_navBar'>
       {!user.isAdmin ?
         (<Link to={'/login'}>
           <UserIcon className='header_navBar_icon' />
         </Link>) : (
-          <><UserIcon className='header_navBar_icon' onClick={() => setToggleMenu(() => !toggleMenu)} />{toggleMenu && <UserNav />}</>
+          <><UserIcon className='header_navBar_icon' onClick={() => handleToggleMenu()} />{toggleMenu && <UserNav toggleMenu={handleToggleMenu} />}</>
         )
       }
       <ShoppingCartIcon className='header_navBar_icon' />
