@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { reset, register } from '../../features/auth/authSlice';
 import { RegisterFormData } from '../../interfaces/loginFormData';
@@ -55,12 +55,15 @@ const Register: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div>
-      <RegisterForm
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        formData={formData}
-      />
+    <div className='auth_container'>
+      <section>
+        <RegisterForm
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          formData={formData}
+        />
+      </section>
+      <Link to='/login'>Sign in</Link>
     </div>
   )
 }
