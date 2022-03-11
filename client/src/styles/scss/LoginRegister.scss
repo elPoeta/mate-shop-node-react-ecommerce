@@ -8,7 +8,7 @@
   width: 90%;
   height: 20rem;
   border: 1px solid #ccc;
-
+  overflow: hidden;
   section form {
     display: grid;
     grid-template-columns: 1fr 130px;
@@ -23,13 +23,26 @@
     button {
       grid-column: 2 / -1;
       height: 3rem;
-      background-color: $green-color-600;
-      color: #fff;
+      color: $green-color-600;
+      background-color: #fff;
       border: none;
       border-radius: 8px;
       font-weight: map-get($font-weights, "bold");
       font-size: 1.1rem;
     }
+  }
+
+  div:last-child {
+    left: 75px;
+    height: 500px;
+    width: 500px;
+    background: $green-color-600;
+    position: relative;
+    border-radius: 50%;
+    z-index: -1;
+    overflow: hidden;
+    opacity: .5;
+    top: -170px;
   }
 
 }

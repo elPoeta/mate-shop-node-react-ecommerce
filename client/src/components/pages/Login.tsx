@@ -64,7 +64,7 @@ const Login: React.FC = (): JSX.Element => {
         />
       </section>
       <Link to='/register'>Sign up</Link>
-
+      <div></div>
     </div>
   )
 }
