@@ -1,2 +1,35 @@
 @use './abstratcs/' as *;
 
+.auth_container {
+  position: absolute;
+  top: 120px;
+  left: 20px;
+  padding: 5px;
+  width: 90%;
+  height: 20rem;
+  border: 1px solid #ccc;
+
+  section form {
+    display: grid;
+    grid-template-columns: 1fr 130px;
+    gap: 10px;
+    height: fit-content;
+    input {
+      grid-column: 1 / -1;
+      font-size: 1.3rem;
+      padding: 5px;
+    }
+
+    button {
+      grid-column: 2 / -1;
+      height: 3rem;
+      background-color: $green-color-600;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: map-get($font-weights, "bold");
+      font-size: 1.1rem;
+    }
+  }
+
+}

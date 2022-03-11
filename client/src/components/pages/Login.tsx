@@ -6,6 +6,8 @@ import { LoginFormData } from '../../interfaces/loginFormData';
 import Spinner from '../common/Spinner';
 import LoginForm from '../user/LoginForm';
 
+import '../../styles/scss/LoginRegister.scss';
+
 const Login: React.FC = (): JSX.Element => {
   const [formData, setFormdata] = useState({ email: '', password: '' });
 
@@ -53,7 +55,7 @@ const Login: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div>
+    <div className='auth_container'>
       <section>
         <LoginForm
           handleSubmit={handleSubmit}
