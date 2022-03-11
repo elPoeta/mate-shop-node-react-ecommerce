@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { logout, reset } from '../../features/auth/authSlice';
 import { UserI } from '../../features/auth/userI';
 import '../../styles/scss/UserNav.scss';
-import Spinner from '../common/Spinner';
 
 interface Props {
   toggleMenu: () => void;
@@ -13,27 +12,27 @@ interface Props {
 const UserNav: React.FC<Props> = (props): JSX.Element => {
   const { toggleMenu } = props;
   const user: UserI | null = useAppSelector(state => state.auth).user;
-  const { isLoading, isError, isSuccess, message } = useAppSelector(state => state.auth);
+  const { isError, message } = useAppSelector(state => state.auth);
   const navigate = useNavigate()
   const dispatch = useAppDispatch();
+
   const handleLogout = () => {
     dispatch(logout());
   }
 
   useEffect(() => {
     if (isError) {
+      console.log(message)
+    }
+    if (!user) {
+      navigate('/login');
+    }
+    return () => {
+      dispatch(reset());
+      navigate('/login');
       toggleMenu();
     }
-    if (isSuccess || !user) {
-      navigate('/')
-      toggleMenu();
-    }
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch, toggleMenu])
-
-  if (isLoading) {
-    return <Spinner className='spinner-wave' />
-  }
+  }, [user, navigate, isError, message, dispatch, toggleMenu])
 
   return (
     <section className='header_user-nav'>
