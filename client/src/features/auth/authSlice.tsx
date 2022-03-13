@@ -16,9 +16,10 @@ const checkToken = () => {
   const token = localStorage.getItem('user');
   if (!token) return null;
   const jwt: UserI = jwtDecode(token);
-  const future = new Date(jwt.iat);
-  const mls = future.setDate(future.getDate() + 30);
-  if (mls < Date.now()) return null;
+  const iat = new Date(jwt.iat);
+  const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+  const thirtyDaysFromIat = iat.getTime() + THIRTY_DAYS;
+  if (thirtyDaysFromIat < Date.now()) return null;
   return jwt;
 }
 const user: UserI | null = checkToken();
