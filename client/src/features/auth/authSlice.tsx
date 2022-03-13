@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import jwtDecode from 'jwt-decode';
 import { LoginFormData, RegisterFormData } from '../../interfaces/loginFormData';
 import authService from './authService';
 import { UserI } from './userI';
@@ -11,8 +12,19 @@ interface State {
   message: string;
 }
 
+const checkToken = () => {
+  const token = localStorage.getItem('user');
+  if (!token) return null;
+  const jwt: UserI = jwtDecode(token);
+  const future = new Date(jwt.iat);
+  const mls = future.setDate(future.getDate() + 30);
+  if (mls < Date.now()) return null;
+  return jwt;
+}
+const user: UserI | null = checkToken();
+
 const initialState = {
-  user: null,
+  user: user,
   isError: false,
   isSuccess: false,
   isLoading: false,
