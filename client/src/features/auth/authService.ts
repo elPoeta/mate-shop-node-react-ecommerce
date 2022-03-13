@@ -22,7 +22,6 @@ const authHelper = async (userData: LoginFormData | RegisterFormData, url: strin
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data.token));
     const jwt: UserI = jwtDecode(response.data.token);
-    console.log("JWT", jwt)
     return jwt;
   }
   return response.data;
