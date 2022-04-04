@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound';
 import Register from './pages/Register';
 
 const Router: React.FC = (): JSX.Element => (
-  <>
+  <div className='min-h-screen'>
     <BrowserRouter>
       <Header />
       <Routes>
@@ -18,7 +18,7 @@ const Router: React.FC = (): JSX.Element => (
         <Route path="*" element={<Navigate to="notFound" />} />
       </Routes>
     </BrowserRouter>
-  </>
+  </div>
 );
 
 export default Router;

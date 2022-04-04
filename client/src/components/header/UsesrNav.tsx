@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { logout, reset } from '../../features/auth/authSlice';
 import { UserI } from '../../features/auth/userI';
-import '../../styles/scss/UserNav.scss';
 
 interface Props {
   toggleMenu: () => void;
@@ -35,9 +34,9 @@ const UserNav: React.FC<Props> = (props): JSX.Element => {
   }, [user, navigate, isError, message, dispatch, toggleMenu])
 
   return (
-    <section className='header_user-nav'>
+    <section className=''>
       <p>Welcome {!user!.isAdmin ? <span>Customer</span> : <span>Admin</span>}</p>
-      <ul className='header_user-nav-menu'>
+      <ul className=''>
         {user!.isAdmin && <li><Link to='/'>Admin panel</Link></li>}
         <li><Link to='/' >Dashboard</Link></li>
         <li><Link to='/' >My account</Link></li>

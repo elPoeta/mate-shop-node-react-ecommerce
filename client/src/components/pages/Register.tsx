@@ -55,7 +55,7 @@ const Register: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div className='auth_container'>
+    <div className=''>
       <section>
         <RegisterForm
           handleChange={handleChange}
