@@ -19,7 +19,7 @@ const NavBar: React.FC = (): JSX.Element => {
         (<Link to={'/login'}>
           <UserIcon className='h-6 w-6' />
         </Link>) : (
-          <><UserIcon className='h-6 w-6' onClick={() => handleToggleMenu()} />{toggleMenu && <UserNav toggleMenu={handleToggleMenu} />}</>
+          <div className='relative'><UserIcon className='h-6 w-6' onClick={() => handleToggleMenu()} />{toggleMenu && <UserNav toggleMenu={handleToggleMenu} />}</div>
         )
       }
       <ShoppingCartIcon className='h-6 w-6 ml-2' />
