@@ -14,15 +14,15 @@ const NavBar: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div className='flex items-center justify-end mr-2'>
+    <div className='flex items-center justify-end mr-2 md:col-start-4'>
       {!user.isAdmin ?
         (<Link to={'/login'}>
           <UserIcon className='h-6 w-6' />
         </Link>) : (
-          <div className='relative'><UserIcon className='h-6 w-6' onClick={() => handleToggleMenu()} />{toggleMenu && <UserNav toggleMenu={handleToggleMenu} />}</div>
+          <div className='relative'><UserIcon className='h-6 w-6 md:h-8 md:w-8' onClick={() => handleToggleMenu()} />{toggleMenu && <UserNav toggleMenu={handleToggleMenu} />}</div>
         )
       }
-      <ShoppingCartIcon className='h-6 w-6 ml-2' />
+      <div className='ml-2'><ShoppingCartIcon className='h-6 w-6 md:h-8 md:w-8' /></div>
     </div>
   )
 }
