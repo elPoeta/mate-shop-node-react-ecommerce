@@ -14,7 +14,7 @@ const NavBar: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div className='flex items-center justify-end mr-2 md:col-start-4'>
+    <div className='col-start-3 flex items-center justify-end mr-2 md:col-start-4'>
       {!user.isAdmin ?
         (<Link to={'/login'}>
           <UserIcon className='h-6 w-6' />
