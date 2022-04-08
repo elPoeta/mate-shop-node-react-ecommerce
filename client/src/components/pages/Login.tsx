@@ -54,15 +54,15 @@ const Login: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div className='grid grid-cols-1 gap-3 w-[90%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] md:w-[30%]'>
-      <section className='border border-emerald-600 rounded-sm p-4'>
+    <div className='grid grid-cols-1 gap-3 w-[90%] shadow-md p-2 bg-emerald-100 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] md:w-[30%]'>
+      <section className='border border-emerald-600 rounded-sm p-4 bg-white'>
         <LoginForm
           handleSubmit={handleSubmit}
           handleChange={handleChange}
           formData={formData}
         />
       </section>
-      <Link to='/register' className='p-2 border border-emerald-500 rounded-full text-emerald-800 w-40 text-center'>Sign up</Link>
+      <Link to='/register' className='p-2 border border-emerald-500 rounded-full text-emerald-800 w-40 text-center bg-white'>Sign up</Link>
     </div>
   )
 }

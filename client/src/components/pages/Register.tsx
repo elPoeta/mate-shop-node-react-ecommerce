@@ -55,15 +55,15 @@ const Register: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div className=''>
-      <section>
+    <div className='grid grid-cols-1 gap-3 w-[90%] shadow-md p-2 bg-emerald-100 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] md:w-[30%]'>
+      <section className='border border-emerald-600 rounded-sm p-4 bg-white'>
         <RegisterForm
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           formData={formData}
         />
       </section>
-      <Link to='/login'>Sign in</Link>
+      <Link to='/login' className='p-2 border border-emerald-500 rounded-full text-emerald-800 w-40 text-center bg-white'>Sign in</Link>
       <div></div>
     </div>
   )
